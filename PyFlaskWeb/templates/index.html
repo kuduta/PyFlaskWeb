@@ -1,0 +1,44 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h2>ยอดรวมติดตั้งทั้งหมด จำนวน {{resultall}} เครื่อง</h2>
+    <p class="lead">
+        <ul>
+            <li>หน่วยงานในส่วนกลางรวมภาค 1-3 จำนวน {{all}} เครื่อง</li>
+            <li>หน่วยงานในภาค 4 จำนวน {{pak4}} เครื่อง</li>
+            <li>หน่วยงานในภาค 5 จำนวน {{pak5}} เครื่อง</li>
+            <li>หน่วยงานในภาค 6 จำนวน {{pak6}} เครื่อง</li>
+            <li>หน่วยงานในภาค 7 จำนวน {{pak7}} เครื่อง</li>
+            <li>หน่วยงานในภาค 8 จำนวน {{pak8}} เครื่อง</li>
+            <li>หน่วยงานในภาค 9 จำนวน {{pak9}} เครื่อง</li>
+            <li>หน่วยงานในภาค 10 จำนวน {{pak10}} เครื่อง</li>
+            <li>หน่วยงานในภาค 11 จำนวน {{pak11}} เครื่อง</li>
+            <li>หน่วยงานในภาค 12 จำนวน {{pak12}} เครื่อง</li>
+        </ul>
+    </p>
+    <p><a href="{{ url_for('install') }}" class="btn btn-primary btn-large">ช้อมูลเพิ่มเติม &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>สำนักงานที่ติดตั้งล่าสุด</h2>
+        <p>
+            .....
+        </p>
+        <p><a class="btn btn-default" href="{{ url_for('realinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>สรุปตามสำนักงานทั้งหมด</h2>
+        <p>.....</p>
+        <p><a class="btn btn-default" href="{{ url_for('resultinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>สำรองไม่ใช้งาน</h2>
+        <p>....</p>
+        <p><a class="btn btn-default" href="{{ url_for('home') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
+    </div>
+</div>
+
+{% endblock %}
