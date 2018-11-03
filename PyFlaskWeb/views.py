@@ -68,7 +68,7 @@ def contact():
         'contact.html',
         title='Contact',
         year=datetime.now().year,
-        message='Contact'
+        message=''
     )
 
 @app.route('/about')
@@ -78,7 +78,7 @@ def about():
         'about.html',
         title='About',
         year=datetime.now().year,
-        message='Description.'
+        message=''
     )
 
 
