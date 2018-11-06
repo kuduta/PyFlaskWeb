@@ -42,7 +42,6 @@
     <Folder Include="PyFlaskWeb\templates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PyFlaskWeb\flaskweb.cfg" />
     <Content Include="PyFlaskWeb\templates\install.html" />
     <Content Include="PyFlaskWeb\templates\realinstall.html" />
     <Content Include="PyFlaskWeb\templates\resultinstall.html" />
