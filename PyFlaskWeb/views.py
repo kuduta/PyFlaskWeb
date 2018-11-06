@@ -164,7 +164,7 @@ def get_data():
         qryIP.inputTime_ = inputTime
         qryIP.inputDate_ = inputDate
         db.session.commit()
-        return '<h1> OK...Update'
+        return '<h1> Send data suscess'
 
 
 
