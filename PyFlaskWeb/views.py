@@ -128,44 +128,42 @@ def get_data():
         inputTime = datetime.now().strftime("%H:%M:%S")
         inputDate = datetime.now().strftime("%Y-%m-%d")
 
-    print(comName, serialNumber, SID, manufacturer, ntVer, operSys, domain, ipaddress, netID, MAC,
+        print(comName, serialNumber, SID, manufacturer, ntVer, operSys, domain, ipaddress, netID, MAC,
                     productName, version, GUID, server, inputTime,  inputDate)
 
 
 
+        if db.session.query(Data).filter(Data.ipaddress_ == ipaddress).count()== 0:
+            qryOffice=db.session.query(DataOffice).filter(DataOffice.subNet_==netID).first()
+            ioffCode = qryOffice.offCode_  
+            ioffName = qryOffice.offName_ 
+            iinPak = qryOffice.inPak_ 
+            iinProvince = qryOffice.inProvince_ 
+            idirOffice = qryOffice.dirOffice_ 
 
-    if db.session.query(Data).filter(Data.ipaddress_ == ipaddress).count()== 0:
-
-        qryOffice=db.session.query(DataOffice).filter(DataOffice.subNet_==netID).first()
-        ioffCode = qryOffice.offCode_  
-        ioffName = qryOffice.offName_ 
-        iinPak = qryOffice.inPak_ 
-        iinProvince = qryOffice.inProvince_ 
-        idirOffice = qryOffice.dirOffice_ 
-
-        data=Data(comName, serialNumber, SID, manufacturer, ntVer,operSys,domain,ipaddress,netID,MAC,productName,version,GUID,server,inputTime,inputDate,ioffCode, ioffName , iinPak , iinProvince , idirOffice )
-        db.session.add(data)
-        db.session.commit()
-        return '<H1> OK .....add.....'
-    else:
-        qryIP= db.session.query(Data).filter(Data.ipaddress_==ipaddress).first()
-        qryIP.comName_ = comName
-        qryIP.serialNumber_ = serialNumber
-        qryIP.SID_ = SID
-        qryIP.manufacturer_ = manufacturer
-        qryIP.ntVer_ = ntVer
-        qryIP.operSys_ = operSys
-        qryIP.domain_ = domain
-        qryIP.netID_ = netID
-        qryIP.MAC_ = MAC
-        qryIP.productName_ = productName
-        qryIP.version_ = version
-        qryIP.GUID_ = GUID
-        qryIP.server_ = server
-        qryIP.inputTime_ = inputTime
-        qryIP.inputDate_ = inputDate
-        db.session.commit()
-        return '<h1> Send data suscess'
+            data=Data(comName, serialNumber, SID, manufacturer, ntVer,operSys,domain,ipaddress,netID,MAC,productName,version,GUID,server,inputTime,inputDate,ioffCode, ioffName , iinPak , iinProvince , idirOffice )
+            db.session.add(data)
+            db.session.commit()
+            return '<H1> OK .....add.....'
+        else:
+            qryIP= db.session.query(Data).filter(Data.ipaddress_==ipaddress).first()
+            qryIP.comName_ = comName
+            qryIP.serialNumber_ = serialNumber
+            qryIP.SID_ = SID
+            qryIP.manufacturer_ = manufacturer
+            qryIP.ntVer_ = ntVer
+            qryIP.operSys_ = operSys
+            qryIP.domain_ = domain
+            qryIP.netID_ = netID
+            qryIP.MAC_ = MAC
+            qryIP.productName_ = productName
+            qryIP.version_ = version
+            qryIP.GUID_ = GUID
+            qryIP.server_ = server
+            qryIP.inputTime_ = inputTime
+            qryIP.inputDate_ = inputDate
+            db.session.commit()
+            return '<h1> Update OK'
 
 
 
