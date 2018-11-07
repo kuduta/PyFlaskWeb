@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:P@ssw0rd308@localhost/pcinstall'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:P@ssw0rd308@localhost/PCInstall'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
