@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h2>ติดตั้งทั้งหมด จำนวน {{resultall}} เครื่อง</h2>
+    <h3>ติดตั้งทั้งหมด จำนวน {{resultall}} เครื่อง</h3>
     <p class="lead">
         <ul>
             <li>หน่วยงานในส่วนกลาง {{center}} เครื่อง</li>
@@ -26,19 +26,19 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>สำนักงานที่ติดตั้งล่าสุด</h2>
+        <h3>สรุปการติดตั้งวันนี้</h3>
         <p>
             .....
         </p>
-        <p><a class="btn btn-default" href="{{ url_for('realinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
+        <p><a class="btn btn-default" href="{{ url_for('dailyinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>สรุปตามสำนักงานทั้งหมด</h2>
+        <h3>สรุปการติดตั้งรายสำนักงาน</h3>
         <p>.....</p>
         <p><a class="btn btn-default" href="{{ url_for('resultinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>สำรองไม่ใช้งาน</h2>
+        <h3>สรุป</h3>
         <p>....</p>
         <p><a class="btn btn-default" href="{{ url_for('home') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
     </div>

@@ -3,28 +3,24 @@
 {% block content %}
 
 <h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+
 
 <p class="lead">
     <table class=todos>
         <tr>
-            <th>#
-            <th>Title
-            <th>Date
-            <th>
-                Done?
-                {%- for todo in todos %}
+            
+               
         <tr class= title>
-            <td>{{ DataOffices.id }}
-            <td>{{ DataOffice.offCode_ }}
-            <td>{{ DataOffices.offName_ }}
-            <td>{{ DataOffices.subNet }}
-            <td>{{ DataOffices.inPak}}
-            <td><input type=checkbox name=done.{{ DataOffices.id }}{{ " checked" if DataOffices.done }}>
-<tr class=text>
-            <td colspan=3>{{ DataOffices.text }}</td>
-            {%- endfor %}
+            <td>{{ alllist }}
+            
+            
+
+            
+            <tr class=text>
+            
+            
     </table>
+  
 </p>
 
 <p>Use this area to provide additional information.</p>

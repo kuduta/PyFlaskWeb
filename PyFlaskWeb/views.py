@@ -1,11 +1,16 @@
 """
 Routes and views for the flask application.
 """
-
+import json
+import pandas as pd
 from datetime import datetime
 from flask import Flask, request, flash, url_for, redirect, render_template
 from PyFlaskWeb import app
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine ,func
+
+
+engine = create_engine('postgresql://postgres:P@ssw0rd308@localhost/pcinstall',echo=False)
 
 
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:P@ssw0rd308@localhost/pcinstall'
@@ -144,7 +149,7 @@ def get_data():
             data=Data(comName, serialNumber, SID, manufacturer, ntVer,operSys,domain,ipaddress,netID,MAC,productName,version,GUID,server,inputTime,inputDate,ioffCode, ioffName , iinPak , iinProvince , idirOffice )
             db.session.add(data)
             db.session.commit()
-            return '<H1> OK .....add.....'
+            return '<H2> OK .....add.....'
         else:
             qryIP= db.session.query(Data).filter(Data.ipaddress_==ipaddress).first()
             qryIP.comName_ = comName
@@ -167,7 +172,7 @@ def get_data():
 
 
 
-    return "<h1>HAHA xxxxxxxxxxxx"
+    return "<h2>HAHA xxxxxxxxxxxx"
 
 
 
@@ -236,32 +241,45 @@ def about():
 
 
 @app.route('/install')
-def install():
+def install():  
+    alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
     
+    #alllist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all()
+    #label = ['Office Name','Ip Address', 'Date Install ','Time Install' ]
+    #df = pd.DataFrame.from_records(alllist, columns=labels)
     return render_template(
         'install.html',
         title='install',
         year=datetime.now().year,
-        #message='...'
+        alllist = alllist
+        
+        
         
         )
+    
 
-@app.route('/realinstall')
-def realinstall():
-    datas=Data.query.order_by(Data.id).all().count()
-    return render_template(
-        'realinstall.html',
-        title='realinstall',
-        year=datetime.now().year,
-        datas = datas
-        #message='real install.'
-        )
+
+
 
 @app.route('/resultinstall')
 def resultinstall():
+    #offresult = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
+    #offresult = db.session.query(Data.ioffName_ ,Data.ioffCode_, func.count(Data.ioffName_)).group_by(Data.ioffCode_ ).all()
+    offresult = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all() 
     return render_template(
         'resultinstall.html',
         title='resultinstall',
         year=datetime.now().year,
-        message='result install'
+        offresult = offresult
+        )
+
+@app.route('/dailyinstall')
+def dailyinstall():
+    datanow = datetime.now().strftime("%Y-%m-%d")
+    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).all()
+    return render_template(
+        'dailyinstall.html',
+        title='dailyinstall',
+        year=datetime.now().year,
+        dailylist=dailylist
         )
