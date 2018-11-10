@@ -184,24 +184,67 @@ def home():
     #guests=db.session.query(Appointments.time,Clients.name).join(Clients).filter(Appointment.clientnumber==Clients.clientnumber).filter(Appointments.weekyr==weekyrnum).all()
     #session.query(models.Model1).join(models.Model2).filter(models.Model2.name == 'TEST')
     
-    center=db.session.query(Data).filter(Data.iinPak_=='0').count()
+    resultall=db.session.query(Data).count()
+    #center=db.session.query(Data).filter(Data.iinPak_=='0').count()
     
-    pak1=db.session.query(Data).filter(Data.iinPak_=='1').count()
-    pak2=db.session.query(Data).filter(Data.iinPak_=='2').count()
-    pak3=db.session.query(Data).filter(Data.iinPak_=='3').count()
-    pak4=db.session.query(Data).filter(Data.iinPak_=='4').count()
-    pak5=db.session.query(Data).filter(Data.iinPak_=='5').count()
-    pak6=db.session.query(Data).filter(Data.iinPak_=='6').count()
-    pak7=db.session.query(Data).filter(Data.iinPak_=='7').count()
-    pak8=db.session.query(Data).filter(Data.iinPak_=='8').count()
-    pak9=db.session.query(Data).filter(Data.iinPak_=='9').count()
-    pak10=db.session.query(Data).filter(Data.iinPak_=='10').count()
-    pak11=db.session.query(Data).filter(Data.iinPak_=='11').count()
-    pak12=db.session.query(Data).filter(Data.iinPak_=='12').count()
-    resultall=center+pak1+pak2+pak3 + pak4 + pak5 + pak6 + pak7 + pak8 + pak9 + pak10 + pak11 + pak12
+    #pak1=db.session.query(Data).filter(Data.iinPak_=='1').count()
+    #pak2=db.session.query(Data).filter(Data.iinPak_=='2').count()
+    #pak3=db.session.query(Data).filter(Data.iinPak_=='3').count()
+    #pak4=db.session.query(Data).filter(Data.iinPak_=='4').count()
+    #pak5=db.session.query(Data).filter(Data.iinPak_=='5').count()
+    #pak6=db.session.query(Data).filter(Data.iinPak_=='6').count()
+    #pak7=db.session.query(Data).filter(Data.iinPak_=='7').count()
+    #pak8=db.session.query(Data).filter(Data.iinPak_=='8').count()
+    #pak9=db.session.query(Data).filter(Data.iinPak_=='9').count()
+    #pak10=db.session.query(Data).filter(Data.iinPak_=='10').count()
+    #pak11=db.session.query(Data).filter(Data.iinPak_=='11').count()
+    #pak12=db.session.query(Data).filter(Data.iinPak_=='12').count()
+    #resultall=center+pak1+pak2+pak3 + pak4 + pak5 + pak6 + pak7 + pak8 + pak9 + pak10 + pak11 + pak12
 
     #listall  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
     #df_listall = pd.DataFrame(listall)
+    alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
+    center= 0 
+    pak1 = 0
+    pak2 = 0 
+    pak3 = 0
+    pak4 = 0 
+    pak5 = 0
+    pak6 = 0
+    pak7 = 0
+    pak8 = 0
+    pak9 = 0
+    pak10 = 0  
+    pak11 = 0 
+    pak12  = 0
+    for x,y in alllist:
+        if x == '0':
+            center = y
+        elif x == '1':
+            pak1 = y
+        elif x=='2':
+            pak2 = y
+        elif x == '3':
+            pak3 = y
+        elif x == '4':
+            pak4 = y
+        elif x=='5':
+            pak5 = y
+        elif x == '6':
+            pak6 = y
+        elif x == '7':
+            pak7 = y
+        elif x=='8':
+            pak8 = y
+        elif x == '9':
+            pak9 = y
+        elif x == '10':
+            pak10 = y
+        elif x=='11':
+            pak11 = y
+        elif x == '12':
+            pak12 = y
+
     return render_template(
         'index.html',
         title='Home Page',
@@ -219,7 +262,7 @@ def home():
         pak10=pak10, 
         pak11=pak11,
         pak12=pak12, 
-        resultall = resultall,
+        resultall = resultall
         #df_listall = df_listall
     )
 
@@ -247,19 +290,74 @@ def about():
 @app.route('/install')
 def install():  
     alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
+    resultall=db.session.query(Data).count()
     #df_alllist = pd.DataFrame(alllist)
     #alllist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all()
     #label = ['Office Name','Ip Address', 'Date Install ','Time Install' ]
     #df = pd.DataFrame.from_records(alllist, columns=labels)
+    #alllist = sorted(alllist, key=lambda tup: tup[0])
+    center= 0 
+    pak1 = 0
+    pak2 = 0 
+    pak3 = 0
+    pak4 = 0 
+    pak5 = 0
+    pak6 = 0
+    pak7 = 0
+    pak8 = 0
+    pak9 = 0
+    pak10 = 0  
+    pak11 = 0 
+    pak12  = 0
+    for x,y in alllist:
+        if x == '0':
+            center = y
+        elif x == '1':
+            pak1 = y
+        elif x=='2':
+            pak2 = y
+        elif x == '3':
+            pak3 = y
+        elif x == '4':
+            pak4 = y
+        elif x=='5':
+            pak5 = y
+        elif x == '6':
+            pak6 = y
+        elif x == '7':
+            pak7 = y
+        elif x=='8':
+            pak8 = y
+        elif x == '9':
+            pak9 = y
+        elif x == '10':
+            pak10 = y
+        elif x=='11':
+            pak11 = y
+        elif x == '12':
+            pak12 = y
+
+
+
     return render_template(
         'install.html',
         title='install',
         year=datetime.now().year,
-        alllist = alllist,
-        #df_alllist = df_alllist
-        
-        
-        
+        #alllist = alllist,
+        resultall = resultall,
+        center=center,
+        pak1=pak1,
+        pak2=pak2,
+        pak3=pak3,
+        pak4=pak4, 
+        pak5=pak5, 
+        pak6=pak6, 
+        pak7=pak7, 
+        pak8=pak8, 
+        pak9=pak9, 
+        pak10=pak10, 
+        pak11=pak11,
+        pak12=pak12       
         )
     
 
@@ -284,7 +382,7 @@ def resultinstall():
 @app.route('/dailyinstall')
 def dailyinstall():
     datanow = datetime.now().strftime("%Y-%m-%d")
-    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).filter(Data.inputTime_.desc() ).all()
+    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).all()
     return render_template(
         'dailyinstall.html',
         title='dailyinstall',

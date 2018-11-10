@@ -1,7 +1,8 @@
+pip<18.0
 Flask<1
 Flask-SQLAlchemy
 psycopg2
 psycopg2-binary
 pandas
-uwsgi
+
 

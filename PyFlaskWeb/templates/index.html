@@ -2,14 +2,13 @@
 
 {% block content %}
 
-
-
-<div class="jumbotron">
-    <h2>ติดตั้งแล้วเสร็จ {{resultall}} เครื่อง</h2>
-    <div id="graphDiv2"></div>
-    <!--[if IE]><script src="/static/scripts/excanvas.js"></script><![endif]-->
-    <script src="/static/scripts/html5-canvas-bar-graph.js"></script>
-    <script>
+<p class="lead">
+    <div class="jumbotron">
+        <h2>ติดตั้งแล้วเสร็จ {{resultall}} เครื่อง</h2>
+        <div id="graphDiv2"></div>
+        <!--[if IE]><script src="/static/scripts/excanvas.js"></script><![endif]-->
+        <script src="/static/scripts/html5-canvas-bar-graph.js"></script>
+        <script>
     (function () {
 
         function createCanvas(divName) {
@@ -39,23 +38,9 @@
 
     }());</script>
 
-    <p class="lead">
-        <ul>
-            <li>หน่วยงานในส่วนกลาง {{center}} เครื่อง</li>
-            <li>หน่วยงานในภาค 1 จำนวน {{pak1}} เครื่อง</li>
-            <li>หน่วยงานในภาค 2 จำนวน {{pak2}} เครื่อง</li>
-            <li>หน่วยงานในภาค 3 จำนวน {{pak3}} เครื่อง</li>
-            <li>หน่วยงานในภาค 4 จำนวน {{pak4}} เครื่อง</li>
-            <li>หน่วยงานในภาค 5 จำนวน {{pak5}} เครื่อง</li>
-            <li>หน่วยงานในภาค 6 จำนวน {{pak6}} เครื่อง</li>
-            <li>หน่วยงานในภาค 7 จำนวน {{pak7}} เครื่อง</li>
-            <li>หน่วยงานในภาค 8 จำนวน {{pak8}} เครื่อง</li>
-            <li>หน่วยงานในภาค 9 จำนวน {{pak9}} เครื่อง</li>
-            <li>หน่วยงานในภาค 10 จำนวน {{pak10}} เครื่อง</li>
-            <li>หน่วยงานในภาค 11 จำนวน {{pak11}} เครื่อง</li>
-            <li>หน่วยงานในภาค 12 จำนวน {{pak12}} เครื่อง</li>
-        </ul>
-    </p>
+
+        
+</p>
 
     <p><a href="{{ url_for('install') }}" class="btn btn-primary btn-large">ช้อมูลเพิ่มเติม &raquo;</a></p>
 </div>
