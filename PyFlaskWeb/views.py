@@ -179,30 +179,14 @@ def get_data():
 @app.route('/')
 @app.route('/home')
 def home():
-    """Renders the home page."""
+   
     #guests=db.session.query(Clients).join(Appointments).filter(Appointments.clientnumber==Clients.clientnumber).filter(Appointments.weekyr==weekyrnum).all()
     #guests=db.session.query(Appointments.time,Clients.name).join(Clients).filter(Appointment.clientnumber==Clients.clientnumber).filter(Appointments.weekyr==weekyrnum).all()
     #session.query(models.Model1).join(models.Model2).filter(models.Model2.name == 'TEST')
     
     resultall=db.session.query(Data).count()
     #center=db.session.query(Data).filter(Data.iinPak_=='0').count()
-    
-    #pak1=db.session.query(Data).filter(Data.iinPak_=='1').count()
-    #pak2=db.session.query(Data).filter(Data.iinPak_=='2').count()
-    #pak3=db.session.query(Data).filter(Data.iinPak_=='3').count()
-    #pak4=db.session.query(Data).filter(Data.iinPak_=='4').count()
-    #pak5=db.session.query(Data).filter(Data.iinPak_=='5').count()
-    #pak6=db.session.query(Data).filter(Data.iinPak_=='6').count()
-    #pak7=db.session.query(Data).filter(Data.iinPak_=='7').count()
-    #pak8=db.session.query(Data).filter(Data.iinPak_=='8').count()
-    #pak9=db.session.query(Data).filter(Data.iinPak_=='9').count()
-    #pak10=db.session.query(Data).filter(Data.iinPak_=='10').count()
-    #pak11=db.session.query(Data).filter(Data.iinPak_=='11').count()
-    #pak12=db.session.query(Data).filter(Data.iinPak_=='12').count()
-    #resultall=center+pak1+pak2+pak3 + pak4 + pak5 + pak6 + pak7 + pak8 + pak9 + pak10 + pak11 + pak12
 
-    #listall  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
-    #df_listall = pd.DataFrame(listall)
     alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
     center= 0 
     pak1 = 0
