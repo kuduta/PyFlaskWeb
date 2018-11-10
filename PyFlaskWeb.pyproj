@@ -42,6 +42,8 @@
     <Folder Include="PyFlaskWeb\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PyFlaskWeb\static\scripts\excanvas.js" />
+    <Content Include="PyFlaskWeb\static\scripts\html5-canvas-bar-graph.js" />
     <Content Include="PyFlaskWeb\templates\dailyinstall.html" />
     <Content Include="PyFlaskWeb\templates\install.html" />
     <Content Include="PyFlaskWeb\templates\resultinstall.html" />

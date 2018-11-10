@@ -199,6 +199,9 @@ def home():
     pak11=db.session.query(Data).filter(Data.iinPak_=='11').count()
     pak12=db.session.query(Data).filter(Data.iinPak_=='12').count()
     resultall=center+pak1+pak2+pak3 + pak4 + pak5 + pak6 + pak7 + pak8 + pak9 + pak10 + pak11 + pak12
+
+    #listall  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
+    #df_listall = pd.DataFrame(listall)
     return render_template(
         'index.html',
         title='Home Page',
@@ -216,7 +219,8 @@ def home():
         pak10=pak10, 
         pak11=pak11,
         pak12=pak12, 
-        resultall = resultall
+        resultall = resultall,
+        #df_listall = df_listall
     )
 
 @app.route('/contact')
@@ -243,7 +247,7 @@ def about():
 @app.route('/install')
 def install():  
     alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
-    
+    #df_alllist = pd.DataFrame(alllist)
     #alllist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all()
     #label = ['Office Name','Ip Address', 'Date Install ','Time Install' ]
     #df = pd.DataFrame.from_records(alllist, columns=labels)
@@ -251,7 +255,8 @@ def install():
         'install.html',
         title='install',
         year=datetime.now().year,
-        alllist = alllist
+        alllist = alllist,
+        #df_alllist = df_alllist
         
         
         
@@ -266,17 +271,20 @@ def resultinstall():
     #offresult = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
     #offresult = db.session.query(Data.ioffName_ ,Data.ioffCode_, func.count(Data.ioffName_)).group_by(Data.ioffCode_ ).all()
     offresult = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all() 
+    df_offreuslt = pd.DataFrame(offresult)
+
     return render_template(
         'resultinstall.html',
         title='resultinstall',
         year=datetime.now().year,
-        offresult = offresult
+     
+        df_offreuslt = df_offreuslt
         )
 
 @app.route('/dailyinstall')
 def dailyinstall():
     datanow = datetime.now().strftime("%Y-%m-%d")
-    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).all()
+    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).filter(Data.inputTime_.desc() ).all()
     return render_template(
         'dailyinstall.html',
         title='dailyinstall',
