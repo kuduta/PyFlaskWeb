@@ -3,7 +3,7 @@ Routes and views for the flask application.
 """
 import json
 import pandas as pd
-from datetime import datetime
+from datetime import datetime,timedelta
 from flask import Flask, request, flash, url_for, redirect, render_template
 from PyFlaskWeb import app
 from flask_sqlalchemy import SQLAlchemy
@@ -14,7 +14,6 @@ engine = create_engine('postgresql://postgres:P@ssw0rd308@localhost/pcinstall',e
 
 
 app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:P@ssw0rd308@localhost/pcinstall'
-#app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:P@ssw0rd308@localhost/PCInstall'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -183,10 +182,12 @@ def home():
     #guests=db.session.query(Clients).join(Appointments).filter(Appointments.clientnumber==Clients.clientnumber).filter(Appointments.weekyr==weekyrnum).all()
     #guests=db.session.query(Appointments.time,Clients.name).join(Clients).filter(Appointment.clientnumber==Clients.clientnumber).filter(Appointments.weekyr==weekyrnum).all()
     #session.query(models.Model1).join(models.Model2).filter(models.Model2.name == 'TEST')
-    
+    datenow = datetime.now().strftime('%Y-%m-%d')
+    yesterday=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
     resultall=db.session.query(Data).count()
     #center=db.session.query(Data).filter(Data.iinPak_=='0').count()
-
+    dailycount = db.session.query(Data).filter(Data.inputDate_== datenow).count()
+    yestcount = db.session.query(Data).filter(Data.inputDate_== yesterday).count()
     alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).group_by(Data.iinPak_).all()
     center= 0 
     pak1 = 0
@@ -246,8 +247,10 @@ def home():
         pak10=pak10, 
         pak11=pak11,
         pak12=pak12, 
-        resultall = resultall
-        #df_listall = df_listall
+        resultall = resultall,
+        dailycount = dailycount,
+        yestcount = yestcount
+    
     )
 
 @app.route('/contact')
@@ -321,8 +324,6 @@ def install():
         elif x == '12':
             pak12 = y
 
-
-
     return render_template(
         'install.html',
         title='install',
@@ -365,11 +366,77 @@ def resultinstall():
 
 @app.route('/dailyinstall')
 def dailyinstall():
-    datanow = datetime.now().strftime("%Y-%m-%d")
-    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datanow ).all()
+    #alllist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all()
+    #label = ['Office Name','Ip Address', 'Date Install ','Time Install' ]
+    #df = pd.DataFrame.from_records(alllist, columns=labels)
+    #alllist = sorted(alllist, key=lambda tup: tup[0])
+    datenow = datetime.now().strftime('%Y-%m-%d')
+    yesterday=datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
+    dailylist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).filter(Data.inputDate_== datenow).all()
+    #alllist = db.session.query(Data.ioffName_, Data.ipaddress_, Data.inputDate_, Data.inputTime_).all()
+    #label = ['Office Name','Ip Address', 'Date Install ','Time Install' ]
+    #df = pd.DataFrame.from_records(alllist, columns=labels)
+    #alllist = sorted(alllist, key=lambda tup: tup[0])
+    alllist  = db.session.query(Data.iinPak_, func.count(Data.iinPak_)).filter(Data.inputDate_== datenow).group_by(Data.iinPak_).all()
+    resultall=db.session.query(Data).count()
+    
+    center= 0 
+    pak1 = 0
+    pak2 = 0 
+    pak3 = 0
+    pak4 = 0 
+    pak5 = 0
+    pak6 = 0
+    pak7 = 0
+    pak8 = 0
+    pak9 = 0
+    pak10 = 0  
+    pak11 = 0 
+    pak12  = 0
+    for x,y in alllist:
+        if x == '0':
+            center = y
+        elif x == '1':
+            pak1 = y
+        elif x=='2':
+            pak2 = y
+        elif x == '3':
+            pak3 = y
+        elif x == '4':
+            pak4 = y
+        elif x=='5':
+            pak5 = y
+        elif x == '6':
+            pak6 = y
+        elif x == '7':
+            pak7 = y
+        elif x=='8':
+            pak8 = y
+        elif x == '9':
+            pak9 = y
+        elif x == '10':
+            pak10 = y
+        elif x=='11':
+            pak11 = y
+        elif x == '12':
+            pak12 = y
     return render_template(
         'dailyinstall.html',
         title='dailyinstall',
         year=datetime.now().year,
-        dailylist=dailylist
+        dailylist=dailylist,
+        center=center,
+        pak1=pak1,
+        pak2=pak2,
+        pak3=pak3,
+        pak4=pak4, 
+        pak5=pak5, 
+        pak6=pak6, 
+        pak7=pak7, 
+        pak8=pak8, 
+        pak9=pak9, 
+        pak10=pak10, 
+        pak11=pak11,
+        pak12=pak12  
+
         )

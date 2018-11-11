@@ -49,7 +49,10 @@
     <div class="col-md-4">
         <h3>สรุปการติดตั้งวันนี้</h3>
         <p>
-            .....
+            <ul>
+                <li>วันนี้ติดตั้ง {{dailycount}} เครื่อง</li>
+                <li>เมื่อวานติดตั้ง {{ yestcount}} เครื่อง</li>
+            </ul>
         </p>
         <p><a class="btn btn-default" href="{{ url_for('dailyinstall') }}">ช้อมูลเพิ่มเติม &raquo;</a></p>
     </div>
